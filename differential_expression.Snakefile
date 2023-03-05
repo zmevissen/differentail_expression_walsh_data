@@ -174,8 +174,8 @@ rule download_ref_gff:
 
 rule trim:
     input:
-        r1 = Path(reads_dir, "{sample}_1.fastq.gz").resolve(),
-        r2 = Path(reads_dir, "{sample}_2.fastq.gz").resolve()
+        r1 = Path(reads_dir, "*{sample}*_1*.fastq.gz").resolve(),
+        r2 = Path(reads_dir, "*{sample}*_2*.fastq.gz").resolve()
         
     output:
         r1 = 'output/trim/{sample}_1.fastq.gz',
