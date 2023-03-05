@@ -21,8 +21,8 @@ def maketempdir():
 ###########
 # GLOBALS #
 ###########
-sample_table_loc = "data/sample_table/sample_table.csv"
-reads_dir = 'data/fastq_repaired'
+sample_table_loc = "data/walsh_sample_table.txt"
+reads_dir = 'data/walsh_raw_mRNA_reads'
 
 #genomes downloaded from https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/001/405/GCA_000001405.29_GRCh38.p14/
 ref_gff_url = ('https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.40_GRCh38.p14/GCF_000001405.40_GRCh38.p14_genomic.gff.gz')
@@ -40,9 +40,9 @@ HTTP = HTTPprovider()
 
 sample_table = pandas.read_csv(
     sample_table_loc,
-    index_col="sample_spm_name")
-
-paired_sample_names = sorted(set(sample_table[sample_table.LibraryLayout == 'PAIRED'].index))
+    index_col="sample ID", 
+    sep='\t', 
+    lineterminator='\r')
 
 #########
 # RULES #
