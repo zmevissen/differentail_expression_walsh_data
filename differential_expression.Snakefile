@@ -44,7 +44,8 @@ sample_table = pandas.read_csv(
     sep='\t', 
     lineterminator='\r')
 
-sample_names = sorted(set(sample_table.index))
+sample_names = sorted(set(sample_table[pandas.notnull(sample_table.index)].index))
+
 #########
 # RULES #
 #########
