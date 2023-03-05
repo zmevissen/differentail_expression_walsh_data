@@ -44,6 +44,7 @@ sample_table = pandas.read_csv(
     sep='\t', 
     lineterminator='\r')
 
+sample_names = sorted(set(sample_table.index))
 #########
 # RULES #
 #########
@@ -51,7 +52,7 @@ sample_table = pandas.read_csv(
 rule target:
     input:
         expand('output/star/pass2/{sample}.ReadsPerGene.out.tab',
-               sample=paired_sample_names)
+               sample=sample_names)
         
         
 rule star_second_pass:
@@ -60,7 +61,7 @@ rule star_second_pass:
         r2 = 'output/trim/{sample}_2.fastq.gz',
         star_reference = 'output/star/star-index',
         junctions = expand('output/star/pass1/{sample}.SJ.out.tab',
-                           sample=paired_sample_names)
+                           sample=sample_names)
     output:
         counts = 'output/star/pass2/{sample}.ReadsPerGene.out.tab'
     threads:
