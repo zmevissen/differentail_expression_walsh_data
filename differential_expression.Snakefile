@@ -18,6 +18,19 @@ star = "docker://quay.io/biocontainers/star:2.7.10a--h9ee0642_0"
 def maketempdir():
     return Path(mkdtemp(), 'tmp').resolve().as_posix()
 
+def get_trim_input(wildcards):
+    r1 = Path(reads_dir).glob(f"*{wildcards.sample}*_1*.fastq.gz")
+    r2 = Path(reads_dir).glob(f"*{wildcards.sample}*_2*.fastq.gz")
+    return {"r1": r1,
+            "r2":r2
+           }
+def correct_sample_names(sample_names):
+    corrected_names = []
+    for sample in sample_names:
+        split_list = sample.split("_")
+        corrected_names.append("-".join(split_list))
+      return corrected_names
+
 ###########
 # GLOBALS #
 ###########
@@ -45,6 +58,8 @@ sample_table = pandas.read_csv(
     lineterminator='\r')
 
 sample_names = sorted(set(sample_table[pandas.notnull(sample_table.index)].index))
+
+
 
 #########
 # RULES #
@@ -174,8 +189,7 @@ rule download_ref_gff:
 
 rule trim:
     input:
-        r1 = Path(reads_dir, "*{sample}*_1*.fastq.gz").resolve(),
-        r2 = Path(reads_dir, "*{sample}*_2*.fastq.gz").resolve()
+        unpack(get_trim_input)
         
     output:
         r1 = 'output/trim/{sample}_1.fastq.gz',
