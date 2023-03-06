@@ -29,7 +29,7 @@ def correct_sample_names(sample_names):
     for sample in sample_names:
         split_list = sample.split("_")
         corrected_names.append("-".join(split_list))
-      return corrected_names
+    return corrected_names
 
 ###########
 # GLOBALS #
