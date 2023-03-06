@@ -57,7 +57,7 @@ sample_table = pandas.read_csv(
     sep='\t', 
     lineterminator='\r')
 
-sample_names = sorted(set(sample_table[pandas.notnull(sample_table.index)].index))
+sample_names = correct_sample_names(sorted(set(sample_table[pandas.notnull(sample_table.index)].index)))
 
 
 
