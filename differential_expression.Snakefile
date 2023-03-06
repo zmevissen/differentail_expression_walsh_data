@@ -19,8 +19,8 @@ def maketempdir():
     return Path(mkdtemp(), 'tmp').resolve().as_posix()
 
 def get_trim_input(wildcards):
-    r1 = Path(reads_dir).glob(f"*{wildcards.sample}*_1*.fastq.gz")
-    r2 = Path(reads_dir).glob(f"*{wildcards.sample}*_2*.fastq.gz")
+    r1 = Path(reads_dir).glob(f"*{wildcards.sample}*_R1*.fastq.gz")
+    r2 = Path(reads_dir).glob(f"*{wildcards.sample}*_R2*.fastq.gz")
     return {"r1": r1,
             "r2":r2
            }
