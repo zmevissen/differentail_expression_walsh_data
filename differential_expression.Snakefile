@@ -10,7 +10,7 @@ from tempfile import mkdtemp
 bbmap = "docker://quay.io/biocontainers/bbmap:38.98--h5c4e2a8_1"
 star = "docker://quay.io/biocontainers/star:2.7.10a--h9ee0642_0"
 
-adapters_loc = "/usr/local/opt/bbmap-38.98-1/resources/adapters.fa"
+adapters_path = "/usr/local/opt/bbmap-38.98-1/resources/adapters.fa"
 #############
 # FUNCTIONS #
 #############
@@ -213,7 +213,7 @@ rule trim:
         'zl=9 '
         'in={input.r1} '
         'in2={input.r2} '
-        'ref={adapter_path} '
+        'ref={adapters_path} '
         'out={output.r1} '
         'out2={output.r2} '
         'ktrim=r k=23 mink=11 hdist=1 tpe tbo qtrim=r trimq=15 '
