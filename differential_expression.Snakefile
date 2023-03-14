@@ -76,10 +76,10 @@ rule target:
         
 rule star_second_pass:
     input:
-        r1 = 'output/trim/{sample}_1.fastq.gz',
-        r2 = 'output/trim/{sample}_2.fastq.gz',
+        r1 = 'scratch/trim/{sample}_1.fastq.gz',
+        r2 = 'scratch/trim/{sample}_2.fastq.gz',
         star_reference = 'output/star/star-index',
-        junctions = expand('output/star/pass1/{sample}.SJ.out.tab',
+        junctions = expand('scratch/star/pass1/{sample}.SJ.out.tab',
                            sample=sample_names)
     output:
         counts = 'output/star/pass2/{sample}.ReadsPerGene.out.tab'
@@ -112,15 +112,15 @@ rule star_second_pass:
       
 rule star_first_pass:
     input:
-        r1 = 'output/trim/{sample}_1.fastq.gz',
-        r2 = 'output/trim/{sample}_2.fastq.gz',
+        r1 = 'scratch/trim/{sample}_1.fastq.gz',
+        r2 = 'scratch/trim/{sample}_2.fastq.gz',
         star_reference = 'output/star/star-index' 
     output:
-        sjdb = 'output/star/pass1/{sample}.SJ.out.tab'
+        sjdb = 'scratch/star/pass1/{sample}.SJ.out.tab'
     threads:
         10
     params:
-        prefix = 'output/star/pass1/{sample}.'  
+        prefix = 'scratch/star/pass1/{sample}.'  
     log:
         'output/logs/star_first_pass.{sample}.log'
     resources:
@@ -195,8 +195,8 @@ rule trim:
         unpack(get_trim_input)
         
     output:
-        r1 = 'output/trim/{sample}_1.fastq.gz',
-        r2 = 'output/trim/{sample}_2.fastq.gz'
+        r1 = 'scratch/trim/{sample}_1.fastq.gz',
+        r2 = 'scratch/trim/{sample}_2.fastq.gz'
         
     log:
         'output/logs/trim.{sample}.log'
