@@ -105,7 +105,7 @@ rule star_second_pass:
         '--readFilesIn {input.r1} {input.r2} '
         '--outFileNamePrefix {params.prefix} '
         '--outTmpDir ' + maketempdir() + ' '
-        'limitSjdbInsertNsj 1500000 '
+        '--limitSjdbInsertNsj 1500000 '
         '&> {log}'
         
 
