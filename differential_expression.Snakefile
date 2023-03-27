@@ -90,7 +90,7 @@ rule star_second_pass:
     log:
         'output/logs/star_second_pass.{sample}.log'
     resources:
-        time = 199,
+        time = 299,
         mem_mb = 64 * 1000
     container:
         star
